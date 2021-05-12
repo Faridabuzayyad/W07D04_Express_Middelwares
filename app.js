@@ -3,6 +3,8 @@ const app = express();
 const PORT = 3000;
 //Practice Q1 A
 const routerMidWare = express.Router();
+//Practice Q3 A
+const routerOfProducts = express.Router();
 const users = ["John", "Mark"];
 
 //Pulse Check Q5 B
@@ -65,6 +67,14 @@ routerMidWare.use("/users/create" , (req , res , next)=>{
     }
     next();
 });
+
+//Practice Q3
+routerOfProducts.use("/products" , (req, res, next)=>{
+    next()
+})
+app.use(routerOfProducts);
+
+//Practice Q4
 
 //Pulse Check Q5 - A
 app.use((err , req , res , next)=>{

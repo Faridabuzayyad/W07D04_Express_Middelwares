@@ -10,6 +10,8 @@ const logUsers = (req , res , next) =>{
     next();
 }
 
+app.use(logUsers());
+
 app.get("/users", (req, res, next) => {
   res.json(users);
 });

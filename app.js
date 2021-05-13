@@ -6,7 +6,8 @@ const routerMidWare = express.Router();
 //Practice Q3 A
 const routerOfProducts = express.Router();
 const users = ["John", "Mark"];
-
+//Practice Q4 A
+const products = ["Keyboard" , "Mouse"];
 //Pulse Check Q5 B
 app.use((req,res,next)=>{
     const err = new Error("No users");
@@ -68,13 +69,37 @@ routerMidWare.use("/users/create" , (req , res , next)=>{
     next();
 });
 
-//Practice Q3
+//Practice Q3 B
 routerOfProducts.use("/products" , (req, res, next)=>{
     next()
 })
 app.use(routerOfProducts);
 
-//Practice Q4
+/*Practice Q4 B -- User needs to enter the existing item he wants to replace with key : oldItem , and enter the new item 
+with key : newItem , then this post request will search for the oldItem to replace it */
+app.post("/products/update", (req,res,next)=>{
+    let oldItem = req.body.oldItem;
+    let newItem = req.body.newItem;
+    let indexOfoldItem;
+    let match = products.find((element , index)=>{
+        indexOfoldItem = index;
+        return element === oldItem;
+    })
+    
+    if(match){
+        products.splice(indexOfoldItem, 1 , newItem);
+        //this clg for testing purposes 
+        console.log(products);
+        res.status(200);
+        res.json(`products value now:${products}`);
+    }
+    else{
+        res.json("the Item you are trying to update is not in stock")
+    }
+});
+
+//Practice Q5
+
 
 //Pulse Check Q5 - A
 app.use((err , req , res , next)=>{

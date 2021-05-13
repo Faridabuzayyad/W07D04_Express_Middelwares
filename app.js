@@ -73,6 +73,12 @@ routerMidWare.use("/users/create" , (req , res , next)=>{
 routerOfProducts.use("/products" , (req, res, next)=>{
     next()
 })
+
+//Practice Q5
+routerOfProducts.use("/" , (req, res, next)=>{
+    console.log(routerOfProducts);
+    next()
+})
 app.use(routerOfProducts);
 
 /*Practice Q4 B -- User needs to enter the existing item he wants to replace with key : oldItem , and enter the new item 
@@ -94,11 +100,10 @@ app.post("/products/update", (req,res,next)=>{
         res.json(`products value now:${products}`);
     }
     else{
+        res.status(404);
         res.json("the Item you are trying to update is not in stock")
     }
 });
-
-//Practice Q5
 
 
 //Pulse Check Q5 - A

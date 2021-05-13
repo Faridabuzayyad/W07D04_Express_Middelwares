@@ -8,6 +8,7 @@ const routerOfProducts = express.Router();
 const users = ["John", "Mark"];
 //Practice Q4 A
 const products = ["Keyboard" , "Mouse"];
+
 //Pulse Check Q5 B
 app.use((req,res,next)=>{
     const err = new Error("No users");
@@ -105,6 +106,12 @@ app.post("/products/update", (req,res,next)=>{
     }
 });
 
+//Practice Q6
+app.use("*", (req,res,next)=>{
+    const err = new Error("Not Found");
+    err.status = 404;
+    next(err);
+});
 
 //Pulse Check Q5 - A
 app.use((err , req , res , next)=>{
